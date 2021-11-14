@@ -5,6 +5,7 @@ from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel
 from mininet.cli import CLI
+from functools import partial
 
 class red1 (Topo):
 # Creando la primera RED y agregando sus hosts a cada sw con un for.
@@ -81,7 +82,7 @@ def main() :
  topo2 = red2(n=4)
  topo3 = red3(n=4)
  net1= Mininet(topo1)
- net2 = Mininet(topo2)
+ net2 = Mininet(topo2,controller=partial( RemoteController, ip='127.0.0.1', port=6633 ))
  net3 = Mininet(topo3)
  net1.start()
  net2.start()
